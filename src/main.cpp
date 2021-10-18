@@ -20,6 +20,8 @@ void showPM();
 void showCO2();
 void showTempHum();
 
+const float TEMP_OFFSET = -2.0;
+
 // DISPLAY
 void showTextRectangle(String ln1, String ln2, boolean small)
 {
@@ -60,9 +62,11 @@ void showCO2()
 void showTempHum()
 {
   TMP_RH result = ag.periodicFetchData();
-  showTextRectangle(String(result.t), String(result.rh) + "%", false);
+  float temp = result.t + TEMP_OFFSET;
 
-  tempNode.setProperty("t").send(String(result.t));
+  showTextRectangle(String(temp), String(result.rh) + "%", false);
+
+  tempNode.setProperty("t").send(String(temp));
   humidityNode.setProperty("rh").send(String(result.rh));
 
   mTicker.once_ms_scheduled(3000, showPM);
