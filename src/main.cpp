@@ -20,7 +20,7 @@ void showPM();
 void showCO2();
 void showTempHum();
 
-const float TEMP_OFFSET = -2.0;
+const float TEMP_OFFSET = -4.0;
 
 // DISPLAY
 void showTextRectangle(String ln1, String ln2, boolean small)
